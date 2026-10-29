@@ -218,3 +218,180 @@ html { scroll-padding-top: 96px; }
   .lab-preview-link span { transition: none !important; }
   .service-cards > button:hover { transform: none; }
 }
+
+
+/* JMael V2.1: discernible, progressive editorial interactions.
+   Each effect is optional; the content remains readable without JS. */
+.hero-scroll-indicator {
+  position: absolute;
+  right: 4%;
+  bottom: 44px;
+  z-index: 3;
+  display: inline-flex;
+  gap: 17px;
+  align-items: center;
+  padding: 8px 0 10px;
+  color: #ead1dc;
+  border-bottom: 1px solid #b66c83;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  transition: border-color .22s ease, color .22s ease;
+}
+.hero-scroll-indicator:hover,
+.hero-scroll-indicator:focus-visible { color: white; border-color: white; }
+.hero-scroll-indicator span { display: inline-block; font-size: 22px; line-height: 1; }
+.hero-stage::after {
+  content: "";
+  position: absolute;
+  z-index: -2;
+  pointer-events: none;
+  width: 43vw;
+  max-width: 700px;
+  aspect-ratio: 1;
+  right: -12%;
+  top: -35%;
+  border: 1px solid rgba(201, 112, 142, .12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 90px rgba(177, 72, 105, .015), 0 0 0 180px rgba(177, 72, 105, .014);
+}
+.project-art { isolation: isolate; }
+.project-art::before {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
+    rgba(250, 207, 216, .25),
+    rgba(250, 207, 216, .055) 25%,
+    transparent 58%
+  );
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-art::before,
+  .project-card:focus-visible .project-art::before { opacity: 1; }
+}
+.motion-ready .project-card .card-body h3 > span { transition: color .3s ease, transform .3s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .hero-word {
+    translate: 0 var(--hero-word-shift, 0px);
+    animation: v21-word-reveal 1.1s cubic-bezier(.19, 1, .22, 1) both;
+  }
+  .motion-ready .hero-portrait {
+    translate: 0 var(--hero-portrait-shift, 0px);
+    animation: v21-portrait-reveal 1.35s cubic-bezier(.19, 1, .22, 1) .07s both;
+  }
+  .motion-ready .hero-copy {
+    animation: v21-copy-reveal .9s cubic-bezier(.19, 1, .22, 1) .18s both;
+  }
+  .motion-ready .hero-copy .hero-role {
+    animation: v21-copy-reveal .85s cubic-bezier(.19,1,.22,1) .38s both;
+  }
+  .motion-ready .hero-copy .hero-description,
+  .motion-ready .hero-copy .hero-actions {
+    animation: v21-copy-reveal .85s cubic-bezier(.19,1,.22,1) .52s both;
+  }
+  .hero-scroll-indicator span { animation: v21-scroll-hint 1.7s ease-in-out infinite; }
+  .motion-ready .project-card .project-art {
+    opacity: .55;
+    clip-path: inset(0 0 35% 0);
+    transform: translate3d(0, 24px, 0) scale(.94);
+    transition: clip-path .95s cubic-bezier(.19,1,.22,1),
+                transform .95s cubic-bezier(.19,1,.22,1),
+                opacity .95s ease, filter .4s ease, box-shadow .4s ease, border-color .4s ease !important;
+  }
+  .motion-ready .project-card.is-visible .project-art {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .motion-ready .project-card.is-visible:hover .project-art,
+  .motion-ready .project-card.is-visible:focus-visible .project-art {
+    transform: translate3d(0, -3px, 0) scale(1.027);
+  }
+  .motion-ready .project-card .card-meta,
+  .motion-ready .project-card .card-body h3,
+  .motion-ready .project-card .card-body p,
+  .motion-ready .project-card .card-body::after {
+    opacity: 0;
+    translate: 0 18px;
+    transition: opacity .7s ease, translate .8s cubic-bezier(.19,1,.22,1);
+  }
+  .motion-ready .project-card.is-visible .card-meta,
+  .motion-ready .project-card.is-visible .card-body h3,
+  .motion-ready .project-card.is-visible .card-body p,
+  .motion-ready .project-card.is-visible .card-body::after {
+    opacity: 1;
+    translate: 0 0;
+  }
+  .motion-ready .project-card.is-visible .card-meta { transition-delay: .09s; }
+  .motion-ready .project-card.is-visible .card-body h3 { transition-delay: .19s; }
+  .motion-ready .project-card.is-visible .card-body p { transition-delay: .29s; }
+  .motion-ready .project-card.is-visible .card-body::after { transition-delay: .36s; }
+  .motion-ready .lab-preview::before {
+    transform: translate3d(0, var(--lab-shift, 0px), 0);
+  }
+  .motion-ready .lab-preview-heading h2 span {
+    animation: v21-lab-accent 3s ease-in-out infinite alternate;
+  }
+}
+@keyframes v21-word-reveal {
+  from { opacity: .2; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+@keyframes v21-portrait-reveal {
+  from { opacity: 0; clip-path: inset(43% 0 0 0); transform: translate3d(0, 42px, 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translate3d(0, 0, 0); }
+}
+@keyframes v21-copy-reveal {
+  from { opacity: 0; transform: translate3d(0, 26px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes v21-scroll-hint {
+  0%, 100% { transform: translateY(-3px); }
+  50% { transform: translateY(5px); }
+}
+@keyframes v21-lab-accent {
+  from { color: #c85e72; }
+  to { color: #f09daf; }
+}
+@media (max-width: 900px) {
+  .hero-scroll-indicator { bottom: 31px; }
+  .hero-stage::after { right: -23%; top: -10%; width: 62vw; }
+}
+@media (max-width: 600px) {
+  .hero-scroll-indicator { display: none; }
+  .hero-stage::after { right: -32%; top: 8%; width: 82vw; }
+  .motion-ready .project-card .project-art { clip-path: inset(0 0 22% 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-indicator span { animation: none !important; }
+  .motion-ready .hero-word, .motion-ready .hero-portrait,
+  .motion-ready .hero-copy, .motion-ready .hero-copy .hero-role,
+  .motion-ready .hero-copy .hero-description, .motion-ready .hero-copy .hero-actions,
+  .motion-ready .lab-preview-heading h2 span {
+    animation: none !important;
+    transform: none !important;
+    translate: none !important;
+  }
+  .motion-ready .project-card .project-art,
+  .motion-ready .project-card.is-visible .project-art {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none !important;
+  }
+  .motion-ready .project-card .card-meta,
+  .motion-ready .project-card .card-body h3,
+  .motion-ready .project-card .card-body p,
+  .motion-ready .project-card .card-body::after {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
