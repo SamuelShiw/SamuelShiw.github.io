@@ -44,6 +44,8 @@
   let headerHeight = 82;
   let sceneStep = 550;
   let resizeFrame = 0;
+  let displayedProgress = null;
+  let lastFrameTime = 0;
 
   const clamp = n => Math.max(0, Math.min(1, n));
   const eased = n => {
@@ -77,7 +79,7 @@
       String(scrollMax ? clamp(window.scrollY / scrollMax) : 0));
   }
 
-  function render() {
+  function render(timestamp = performance.now()) {
     scheduled = false;
     updateProgress();
 
@@ -109,17 +111,24 @@
       return;
     }
 
-    const progress = Math.max(0,
+    const targetProgress = Math.max(0,
       Math.min(5, (window.scrollY - storyStart()) / sceneStep));
+    const dt = Math.min(64, Math.max(1, timestamp - (lastFrameTime || timestamp - 16)));
+    lastFrameTime = timestamp;
+    if (displayedProgress === null) displayedProgress = targetProgress;
+    displayedProgress += (targetProgress - displayedProgress) * (1 - Math.exp(-dt / 85));
+    if (Math.abs(targetProgress - displayedProgress) < .0005) displayedProgress = targetProgress;
+    const progress = displayedProgress;
     const selected = Math.max(0, Math.min(5, Math.round(progress)));
 
     scenes.forEach((scene, index) => {
       const opacity = index === 0 ? 1 : eased((progress - (index - 1) - .06) / .86);
       scene.style.setProperty('--scene-opacity', opacity.toFixed(4));
-      scene.style.setProperty('--scene-y', ((1 - opacity) * 46).toFixed(2) + 'px');
-      scene.style.setProperty('--scene-scale', (1.025 - opacity * .025).toFixed(4));
+      scene.style.setProperty('--scene-y', ((1 - opacity) * 24).toFixed(2) + 'px');
+      scene.style.setProperty('--scene-scale', (1.012 - opacity * .012).toFixed(4));
     });
     setCurrentScene(selected);
+    if (displayedProgress !== targetProgress) schedule();
 
     // Only the story controller owns story chapter navigation.
     const activeId = selected === 0 ? 'inicio'
@@ -138,6 +147,8 @@
   function clearStory() {
     active = false;
     current = -1;
+    displayedProgress = null;
+    lastFrameTime = 0;
     root.classList.remove('story-active');
     root.style.removeProperty('--story-header-height');
     surface.style.removeProperty('--story-total-height');
