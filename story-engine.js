@@ -182,7 +182,9 @@
       return;
     }
 
-    clearStory();
+    // During resize, preserve the existing sticky layout. Removing it even
+    // briefly can clamp scrollY and throw the visitor into another section.
+    if (!active) clearStory();
     headerHeight = header ? Math.round(header.getBoundingClientRect().height) : 82;
     const stageHeight = Math.round(window.innerHeight - headerHeight);
     // Shorter scroll distance than V4: deliberate, but not rushed.
