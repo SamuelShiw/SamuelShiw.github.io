@@ -2,7 +2,15 @@ const menu = document.querySelector('.menu-toggle');
 const nav = document.querySelector('#navigation');
 menu.addEventListener('click', () => { const open = menu.getAttribute('aria-expanded') !== 'true'; menu.setAttribute('aria-expanded', String(open)); nav.classList.toggle('open', open); });
 nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
-const sectionObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { nav.querySelectorAll('a').forEach(link => link.classList.toggle('active', link.hash === '#' + entry.target.id)); } }); }, { rootMargin: '-15% 0px -65% 0px' });
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    // The story controller owns active navigation while its stage is pinned.
+    if (document.documentElement.classList.contains('story-active') && entry.target.closest('.editorial-story')) return;
+    nav.querySelectorAll('a').forEach(link =>
+      link.classList.toggle('active', link.hash === '#' + entry.target.id));
+  });
+}, { rootMargin: '-15% 0px -65% 0px' });
 document.querySelectorAll('main section[id]').forEach(section => sectionObserver.observe(section));
 const projects = {
   jmael: {type:'WEB PERSONAL / EN DESARROLLO', title:'El espacio JMael', description:'Mi espacio personal en internet: un lugar para presentarme, compartir trabajos y exploraciones y conectar con personas que quieran construir algo conmigo.', status:'En desarrollo. Primera versión de la estructura y la identidad visual.', focus:'Una presencia personal clara que pueda crecer junto con mis proyectos, contenidos y servicios.'},
