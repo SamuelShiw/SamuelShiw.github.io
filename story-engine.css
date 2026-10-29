@@ -1,0 +1,297 @@
+/* JMael V4 | One continuous, scroll-controlled editorial stage.
+   Designed as progressive enhancement. The base document stays unchanged
+   whenever JS is unavailable, motion is reduced or the viewport is small. */
+.editorial-story,
+.editorial-stage { display: contents; }
+
+@media (min-width: 1100px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
+  html.story-active {
+    --story-header-height: 82px;
+    --story-viewport-height: calc(100svh - var(--story-header-height));
+    scroll-padding-top: calc(var(--story-header-height) + 15px);
+  }
+
+  html.story-active .editorial-story {
+    display: block;
+    position: relative;
+    height: var(--story-total-height);
+    min-height: 100svh;
+    isolation: isolate;
+    background: #0b090b;
+  }
+
+  html.story-active .editorial-stage {
+    display: block;
+    position: sticky;
+    top: var(--story-header-height);
+    height: var(--story-viewport-height);
+    width: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    background: #0b090b;
+  }
+
+  /* Flatten only the story content wrapper: the original semantic sections
+     and anchor IDs remain available for ordinary navigation/fallback. */
+  html.story-active #inicio.hero,
+  html.story-active #proyectos.projects {
+    display: contents;
+  }
+
+  html.story-active .editorial-stage .hero-stage,
+  html.story-active .editorial-stage .services-band,
+  html.story-active .editorial-stage .project-card,
+  html.story-active .editorial-stage .lab-preview {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    opacity: var(--scene-opacity, 0) !important;
+    transform: translate3d(0, var(--scene-y, 42px), 0)
+               scale(var(--scene-scale, 1.035)) !important;
+    translate: none !important;
+    transition: none !important;
+    pointer-events: none;
+    border: 0;
+    overflow: hidden;
+    will-change: opacity, transform;
+    isolation: isolate;
+  }
+
+  html.story-active .editorial-stage [data-story-scene].story-interactive {
+    pointer-events: auto;
+  }
+
+  html.story-active .editorial-stage .hero-stage {
+    z-index: 1;
+    --scene-opacity: 1;
+    background: #0a090a;
+  }
+  html.story-active .editorial-stage .services-band {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(26px, 5vh, 58px);
+    padding: clamp(32px, 5vh, 70px) 5%;
+    background: linear-gradient(117deg, #25141e 0%, #130e12 60%, #111015 100%);
+    box-shadow: 0 0 0 1px #32232c inset;
+  }
+
+  html.story-active #servicios .services-heading { margin: 0; }
+  html.story-active #servicios .services-heading h2 {
+    font-family: var(--display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(36px, 4.1vw, 66px);
+    line-height: .96;
+    letter-spacing: -.025em;
+    max-width: 11ch;
+  }
+  html.story-active #servicios .service-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(22px, 3vw, 50px);
+  }
+  html.story-active #servicios .service-cards > button {
+    background: none;
+    border: 0;
+    border-top: 1px solid #835366;
+    padding: 18px 0 15px;
+    min-height: 172px;
+  }
+  html.story-active #servicios .service-cards h3 {
+    margin-top: 23px;
+    font-size: clamp(29px, 3vw, 46px);
+  }
+  html.story-active #servicios .service-cards p {
+    max-width: 29ch;
+    font-size: clamp(13px, 1.15vw, 16px);
+  }
+
+  /* The project's section is only a semantic container while the chapter
+     has three true full-screen visual scenes. */
+  html.story-active #proyectos .section-heading { display: none !important; }
+  html.story-active #proyectos .project-grid { display: contents; }
+
+  html.story-active #proyectos .project-card {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr);
+    column-gap: clamp(38px, 6vw, 112px);
+    align-items: center;
+    padding: clamp(30px, 4.5vh, 64px) 5%;
+    text-align: left;
+    border-top: 1px solid rgba(211, 151, 173, .27);
+    background: linear-gradient(112deg, #151416 0%, #111012 67%, #180f18 100%);
+  }
+  html.story-active #proyectos .project-card:nth-child(1) {
+    z-index: 3;
+    background: linear-gradient(115deg, #17211c, #121113 64%, #171215);
+  }
+  html.story-active #proyectos .project-card:nth-child(2) {
+    z-index: 4;
+    background: linear-gradient(112deg, #12141b, #171219 60%, #111115);
+  }
+  html.story-active #proyectos .project-card:nth-child(3) {
+    z-index: 5;
+    background: linear-gradient(115deg, #21141b, #111013 65%, #161013);
+  }
+  html.story-active #proyectos .project-card:nth-child(even) .project-art {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  html.story-active #proyectos .project-card:nth-child(even) .card-body {
+    grid-column: 1;
+    grid-row: 1;
+    padding-left: clamp(0px, 3vw, 42px);
+  }
+
+  html.story-active #proyectos .project-card .project-art {
+    height: min(54svh, 480px);
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: calc(var(--story-viewport-height) - 140px);
+    transform: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    filter: saturate(.86) !important;
+    transition: filter .28s ease, border-color .28s ease, box-shadow .28s ease !important;
+    will-change: auto;
+  }
+  html.story-active #proyectos .project-card:hover .project-art,
+  html.story-active #proyectos .project-card:focus-visible .project-art {
+    filter: saturate(1.12) !important;
+    box-shadow: 0 20px 58px rgba(0, 0, 0, .35);
+  }
+  html.story-active #proyectos .card-body { padding: 20px 0; }
+  html.story-active #proyectos .card-meta {
+    font-size: clamp(10px, .86vw, 13px);
+    margin-bottom: clamp(13px, 2vh, 24px);
+  }
+  html.story-active #proyectos .card-body h3 {
+    font-size: clamp(42px, 4.65vw, 82px);
+    line-height: .98;
+  }
+  html.story-active #proyectos .card-body p {
+    font-size: clamp(15px, 1.3vw, 20px);
+    line-height: 1.6;
+    max-width: 32ch;
+    margin-top: clamp(14px, 2.4vh, 24px);
+  }
+  html.story-active #proyectos .card-body::after { margin-top: clamp(18px, 3vh, 40px); }
+
+  html.story-active #proyectos .project-card::before {
+    content: attr(data-story-chapter);
+    position: absolute;
+    right: 5%;
+    bottom: 26px;
+    font: 600 12px/1.2 Arial, sans-serif;
+    letter-spacing: 2.5px;
+    color: #bfa9b3;
+    pointer-events: none;
+  }
+
+  html.story-active #proyectos .code-art pre {
+    font-size: clamp(11px, 1.18vw, 17px);
+    margin: 15px 8%;
+    line-height: 1.45;
+  }
+
+  html.story-active .editorial-stage .lab-preview {
+    z-index: 6;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: clamp(40px, 7vw, 110px);
+    padding: clamp(40px, 6vh, 100px) 6%;
+    background: linear-gradient(125deg, #281520, #100e13 68%, #151018);
+  }
+  html.story-active .lab-preview h2 {
+    font-size: clamp(67px, 8vw, 128px);
+  }
+  html.story-active .lab-preview-content { padding: 0; }
+  html.story-active .lab-preview-content p { font-size: clamp(16px, 1.45vw, 22px); }
+
+  /* Disable the old entrance choreography inside the controlled stage.
+     Otherwise old IntersectionObserver effects can leave visible text at
+     opacity zero beneath the new panels. */
+  html.story-active.motion-ready .editorial-stage .reveal,
+  html.story-active.motion-ready .editorial-stage .reveal.is-visible,
+  html.story-active.motion-ready .editorial-stage .project-card .card-meta,
+  html.story-active.motion-ready .editorial-stage .project-card .card-body h3,
+  html.story-active.motion-ready .editorial-stage .project-card .card-body p,
+  html.story-active.motion-ready .editorial-stage .project-card .card-body::after {
+    opacity: 1 !important;
+    transform: none !important;
+    translate: none !important;
+    transition: none !important;
+    clip-path: none !important;
+  }
+
+  html.story-active.motion-ready .editorial-stage .hero-stage {
+    opacity: var(--scene-opacity, 1) !important;
+    transform: translate3d(0, var(--scene-y, 0px), 0)
+               scale(var(--scene-scale, 1)) !important;
+  }
+  html.story-active.motion-ready .editorial-stage .services-band,
+  html.story-active.motion-ready .editorial-stage .project-card,
+  html.story-active.motion-ready .editorial-stage .lab-preview {
+    opacity: var(--scene-opacity, 0) !important;
+    transform: translate3d(0, var(--scene-y, 42px), 0)
+               scale(var(--scene-scale, 1.035)) !important;
+  }
+  html.story-active .editorial-stage .hero-word,
+  html.story-active .editorial-stage .hero-portrait {
+    translate: none !important;
+  }
+  html.story-active .editorial-stage .project-card .card-body h3,
+  html.story-active .editorial-stage .project-card .card-body p,
+  html.story-active .editorial-stage .project-card .card-meta {
+    visibility: visible !important;
+  }
+
+  /* The chapter rail never captures pointer or keyboard input. */
+  html.story-active .story-rail {
+    display: flex;
+    position: absolute;
+    z-index: 20;
+    right: 4.1%;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+    gap: 11px;
+    pointer-events: none;
+    padding: 15px 8px;
+    border-right: 1px solid rgba(217, 153, 174, .35);
+  }
+  html.story-active .story-rail span {
+    width: 5px;
+    height: 5px;
+    border-radius: 100%;
+    background: #bc98a8;
+    opacity: .35;
+    transform: scale(1);
+    transition: background .25s ease, opacity .25s ease, transform .25s ease;
+  }
+  html.story-active .story-rail span.is-current {
+    opacity: 1;
+    background: #f5d2df;
+    transform: scale(1.65);
+  }
+
+  /* No independent sticky projects from V3 should survive in this mode. */
+  html.story-active #proyectos .project-card,
+  html.story-active #proyectos .project-card:nth-child(1),
+  html.story-active #proyectos .project-card:nth-child(2),
+  html.story-active #proyectos .project-card:nth-child(3) {
+    position: absolute !important;
+  }
+}
+.story-rail { display: none; }
