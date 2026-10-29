@@ -222,8 +222,8 @@
   /* Disable the old entrance choreography inside the controlled stage.
      Otherwise old IntersectionObserver effects can leave visible text at
      opacity zero beneath the new panels. */
-  html.story-active.motion-ready .editorial-stage .reveal,
-  html.story-active.motion-ready .editorial-stage .reveal.is-visible,
+  html.story-active.motion-ready .editorial-stage .reveal:not([data-story-scene]),
+  html.story-active.motion-ready .editorial-stage .reveal.is-visible:not([data-story-scene]),
   html.story-active.motion-ready .editorial-stage .project-card .card-meta,
   html.story-active.motion-ready .editorial-stage .project-card .card-body h3,
   html.story-active.motion-ready .editorial-stage .project-card .card-body p,
@@ -357,4 +357,14 @@
   html.story-active #perfil .process-column {
     background: transparent;
   }
+}
+
+/* Readable supporting text and a stronger personal introduction. */
+.card-meta, .status, .quiet-link, .panel-link, .panel-faq,
+.service-number, .contact-links small { font-size: 13px; color: #cdbdc5; }
+.profile-column > h2 { font-size: clamp(28px, 3vw, 44px); line-height: 1.1; }
+.profile-intro { font-size: 18px; line-height: 1.7; max-width: 36ch; }
+.consulting-panel { background: linear-gradient(145deg, #4c1728, #25121c); }
+#navigation a:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid #e7a9c0; outline-offset: 5px;
 }
