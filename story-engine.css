@@ -368,3 +368,12 @@
 #navigation a:focus-visible, button:focus-visible, a:focus-visible {
   outline: 2px solid #e7a9c0; outline-offset: 5px;
 }
+
+/* Quieter backdrop keeps the portrait and offer in the foreground. */
+.hero-word { opacity: .72; }
+.hero-stage::after { opacity: .4; }
+.hero-cta, .header-contact { transition: background-color .25s ease, border-color .25s ease; }
+.hero-cta:hover, .header-contact:hover { background-color: #692137; border-color: #dc8ca9; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta, .header-contact { transition: none; }
+}
