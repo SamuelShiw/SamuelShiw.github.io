@@ -24,6 +24,8 @@
   if (sceneElements.length !== 6 || sceneElements.some(element => !element)) return;
   if (!('inert' in HTMLElement.prototype)) return;
 
+  sceneElements.forEach((scene, index) => scene.setAttribute('data-story-scene', String(index)));
+
   const sceneAnchors = new Map([
     ['inicio', 0],
     ['servicios', 1],
