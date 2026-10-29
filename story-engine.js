@@ -81,7 +81,21 @@
     scheduled = false;
     updateProgress();
 
+    const lowerSections = ['perfil', 'contacto'];
+    let lowerId = lowerSections.filter(id => document.getElementById(id).getBoundingClientRect().top <= headerHeight + window.innerHeight * .3).pop();
+    if (window.scrollY + window.innerHeight >= root.scrollHeight - 3) lowerId = 'contacto';
+    const markNav = id => navLinks.forEach(link => {
+      const selected = link.hash === '#' + id;
+      link.classList.toggle('active', selected);
+      if (selected) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    if (lowerId) markNav(lowerId);
     if (!active) {
+      if (!lowerId) {
+        const ids = ['inicio', 'servicios', 'proyectos', 'laboratorio'];
+        markNav(ids.filter(id => document.getElementById(id).getBoundingClientRect().top <= window.innerHeight * .35).pop() || 'inicio');
+      }
       // Lightweight parallax for fallback desktop mode. It does not run in
       // the pinned scene, so there are no competing scroll transforms.
       if (!motionQuery.matches && window.innerWidth >= 901 &&
@@ -112,10 +126,7 @@
       : selected === 1 ? 'servicios'
       : selected <= 4 ? 'proyectos' : 'laboratorio';
     const bounds = surface.getBoundingClientRect();
-    if (bounds.top <= window.innerHeight && bounds.bottom >= headerHeight) {
-      navLinks.forEach(link =>
-        link.classList.toggle('active', link.hash === '#' + activeId));
-    }
+    if (!lowerId && bounds.top <= window.innerHeight && bounds.bottom >= headerHeight) markNav(activeId);
   }
 
   function schedule() {
