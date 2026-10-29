@@ -377,3 +377,13 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-cta, .header-contact { transition: none; }
 }
+
+/* Tighten the existing matte by one source pixel, preserving the original photograph. */
+.hero-portrait { mask-image: url("assets/portrait-mask-refined.svg"); -webkit-mask-image: url("assets/portrait-mask-refined.svg"); }
+.hero-description { color: #d3cbd0; }
+.hero-role { color: #e990aa; }
+@media (min-width: 1100px) {
+  .hero-copy { width: min(34vw, 440px); }
+  .hero-description { max-width: 32ch; font-size: 16px; line-height: 1.65; }
+  .hero-cta { max-width: 280px; font-size: 15px; min-height: 48px; }
+}
