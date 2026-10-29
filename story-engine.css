@@ -295,3 +295,66 @@
   }
 }
 .story-rail { display: none; }
+
+
+/* JMael V4.1 audit corrections: visible project context and seamless exit.
+   This layer is activated only after JS's layout-fit checks succeed. */
+@media (min-width: 1100px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
+  /* Keep the semantic projects heading available to assistive technologies,
+     but don't let it consume a second row in the single-stage composition. */
+  html.story-active #proyectos .section-heading {
+    display: block !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    border: 0 !important;
+    overflow: hidden !important;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  html.story-active #proyectos .section-heading > button {
+    display: none !important;
+  }
+
+  /* A chapter label stays visible throughout each project scene. */
+  html.story-active #proyectos .project-card .card-body::before {
+    content: "PROYECTOS EN MARCHA";
+    display: block;
+    color: #d4a6b6;
+    font: 600 clamp(10px, .85vw, 13px)/1.5 Arial, sans-serif;
+    letter-spacing: 2px;
+    margin-bottom: clamp(17px, 3vh, 36px);
+  }
+
+  /* One lightweight controller drives the stage. Turn off the old
+     independent intro animations inside it to avoid conflicting motion. */
+  html.story-active.motion-ready .editorial-stage .hero-copy,
+  html.story-active.motion-ready .editorial-stage .hero-word,
+  html.story-active.motion-ready .editorial-stage .hero-portrait,
+  html.story-active.motion-ready .editorial-stage .hero-role,
+  html.story-active.motion-ready .editorial-stage .hero-description,
+  html.story-active.motion-ready .editorial-stage .hero-actions {
+    animation: none !important;
+  }
+
+  /* Promote only nearby panels, not all six full-screen layers. */
+  html.story-active .editorial-stage [data-story-scene] {
+    will-change: auto;
+  }
+  html.story-active .editorial-stage [data-story-scene].story-near {
+    will-change: opacity, transform;
+  }
+
+  /* The last animated scene now hands off to the personal section through
+     a coherent tonal transition rather than a hard color boundary. */
+  html.story-active #perfil.professional {
+    background: linear-gradient(to bottom, #171019 0, #110d12 86px, #0a090a 240px);
+    border-top: 1px solid #3f2c39;
+  }
+  html.story-active #perfil .profile-column,
+  html.story-active #perfil .process-column {
+    background: transparent;
+  }
+}
