@@ -1,4 +1,4 @@
-/* JMael V4.1 | A single scroll controller and progressive enhancements.
+/* JMael V5 | A single scroll controller and progressive enhancements.
  * Native scrolling always works. The cinematic stage is optional.
  * No dependency, wheel interception or permanent content hiding. */
 (() => {
@@ -106,7 +106,7 @@
         if (heroWord) heroWord.style.setProperty('--hero-word-shift',
           (offset * .16).toFixed(1) + 'px');
         if (portrait) portrait.style.setProperty('--hero-portrait-shift',
-          (-offset * .08).toFixed(1) + 'px');
+          (-offset * .025).toFixed(1) + 'px');
       }
       return;
     }
@@ -121,11 +121,14 @@
     const progress = displayedProgress;
     const selected = Math.max(0, Math.min(5, Math.round(progress)));
 
+    // A short fade through the stage background: never blend two text panels.
+    // Each chapter is fully readable for most of its scroll interval.
     scenes.forEach((scene, index) => {
-      const opacity = index === 0 ? 1 : eased((progress - (index - 1) - .06) / .86);
+      const distance = Math.abs(progress - index);
+      const opacity = index === selected ? 1 - eased((distance - .34) / .16) : 0;
       scene.style.setProperty('--scene-opacity', opacity.toFixed(4));
-      scene.style.setProperty('--scene-y', ((1 - opacity) * 24).toFixed(2) + 'px');
-      scene.style.setProperty('--scene-scale', (1.012 - opacity * .012).toFixed(4));
+      scene.style.setProperty('--scene-y', ((index - progress) * 12).toFixed(2) + 'px');
+      scene.style.visibility = index === selected ? 'visible' : 'hidden';
     });
     setCurrentScene(selected);
     if (displayedProgress !== targetProgress) schedule();
@@ -155,7 +158,8 @@
     scenes.forEach(scene => {
       scene.inert = false;
       scene.classList.remove('story-interactive', 'story-near');
-      for (const key of ['--scene-opacity', '--scene-y', '--scene-scale']) {
+      scene.style.removeProperty('visibility');
+      for (const key of ['--scene-opacity', '--scene-y']) {
         scene.style.removeProperty(key);
       }
     });
@@ -191,11 +195,14 @@
     });
     const laboratoryFits = fits('#laboratorio .lab-preview-heading', 20) &&
       fits('#laboratorio .lab-preview-content', 20);
-    const heroFits = fits('#inicio .hero-copy', 26);
+    const heroFits = fits('#inicio .hero-copy', 16);
     return servicesFit && cardsFit && laboratoryFits && heroFits;
   }
 
   function applyMode() {
+    const previousProgress = active
+      ? Math.max(0, Math.min(5, (window.scrollY - storyStart()) / sceneStep)) : null;
+    const wasInStory = active && window.scrollY <= storyStart() + 5 * sceneStep;
     if (!storyQuery.matches || !('inert' in HTMLElement.prototype) ||
         !window.CSS || !CSS.supports('position', 'sticky') ||
         !CSS.supports('height', '100svh')) {
@@ -220,12 +227,10 @@
     // are translated and enlarged. Otherwise V4 produced false negatives.
     scenes.forEach(scene => {
       scene.style.setProperty('--scene-y', '0px');
-      scene.style.setProperty('--scene-scale', '1');
     });
     const fits = measureContentFit();
     scenes.forEach(scene => {
       scene.style.removeProperty('--scene-y');
-      scene.style.removeProperty('--scene-scale');
     });
     if (!fits) {
       clearStory();
@@ -234,6 +239,10 @@
     }
 
     active = true;
+    if (wasInStory && previousProgress !== null) {
+      displayedProgress = previousProgress;
+      window.scrollTo({ top: storyStart() + previousProgress * sceneStep, behavior: 'instant' });
+    }
     render();
   }
 
