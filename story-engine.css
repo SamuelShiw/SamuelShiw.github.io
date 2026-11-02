@@ -1,4 +1,4 @@
-/* JMael V4 | One continuous, scroll-controlled editorial stage.
+/* JMael V5 | One continuous, scroll-controlled editorial stage.
    Designed as progressive enhancement. The base document stays unchanged
    whenever JS is unavailable, motion is reduced or the viewport is small. */
 .editorial-story,
@@ -42,7 +42,7 @@
   html.story-active .editorial-stage .services-band,
   html.story-active .editorial-stage .project-card,
   html.story-active .editorial-stage .lab-preview {
-    position: absolute !important;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -52,15 +52,13 @@
     max-width: none;
     max-height: none;
     margin: 0;
-    opacity: var(--scene-opacity, 0) !important;
-    transform: translate3d(0, var(--scene-y, 42px), 0)
-               scale(var(--scene-scale, 1.035)) !important;
-    translate: none !important;
-    transition: none !important;
+    opacity: var(--scene-opacity, 0);
+    transform: translate3d(0, var(--scene-y, 0px), 0);
+    translate: none;
+    transition: none;
     pointer-events: none;
     border: 0;
     overflow: hidden;
-    will-change: opacity, transform;
     isolation: isolate;
   }
 
@@ -84,12 +82,21 @@
     box-shadow: 0 0 0 1px #32232c inset;
   }
 
+  html.story-active .hero-copy {
+    top: 50%;
+    transform: translateY(-50%);
+    width: min(36vw, 440px);
+  }
+  html.story-active .hero h1 { font-size: clamp(66px, 6.5vw, 100px); }
+  html.story-active .hero-portrait { height: min(88svh, 745px); bottom: -25px; }
+  html.story-active .hero-word { top: 4%; }
+
   html.story-active #servicios .services-heading { margin: 0; }
   html.story-active #servicios .services-heading h2 {
     font-family: var(--display);
     font-weight: 700;
     text-transform: uppercase;
-    font-size: clamp(36px, 4.1vw, 66px);
+    font-size: clamp(36px, min(4.1vw, 7svh), 66px);
     line-height: .96;
     letter-spacing: -.025em;
     max-width: 11ch;
@@ -117,11 +124,10 @@
 
   /* The project's section is only a semantic container while the chapter
      has three true full-screen visual scenes. */
-  html.story-active #proyectos .section-heading { display: none !important; }
   html.story-active #proyectos .project-grid { display: contents; }
 
   html.story-active #proyectos .project-card {
-    display: grid !important;
+    display: grid;
     grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr);
     column-gap: clamp(38px, 6vw, 112px);
     align-items: center;
@@ -158,16 +164,16 @@
     min-width: 0;
     min-height: 0;
     max-height: calc(var(--story-viewport-height) - 140px);
-    transform: none !important;
-    clip-path: none !important;
-    opacity: 1 !important;
-    filter: saturate(.86) !important;
-    transition: filter .28s ease, border-color .28s ease, box-shadow .28s ease !important;
+    transform: none;
+    clip-path: none;
+    opacity: 1;
+    filter: saturate(.86);
+    transition: filter .28s ease, border-color .28s ease, box-shadow .28s ease;
     will-change: auto;
   }
   html.story-active #proyectos .project-card:hover .project-art,
   html.story-active #proyectos .project-card:focus-visible .project-art {
-    filter: saturate(1.12) !important;
+    filter: saturate(1.12);
     box-shadow: 0 20px 58px rgba(0, 0, 0, .35);
   }
   html.story-active #proyectos .card-body { padding: 20px 0; }
@@ -214,47 +220,16 @@
     background: linear-gradient(125deg, #281520, #100e13 68%, #151018);
   }
   html.story-active .lab-preview h2 {
-    font-size: clamp(67px, 8vw, 128px);
+    font-size: clamp(67px, min(8vw, 13svh), 128px);
   }
   html.story-active .lab-preview-content { padding: 0; }
   html.story-active .lab-preview-content p { font-size: clamp(16px, 1.45vw, 22px); }
 
-  /* Disable the old entrance choreography inside the controlled stage.
-     Otherwise old IntersectionObserver effects can leave visible text at
-     opacity zero beneath the new panels. */
-  html.story-active.motion-ready .editorial-stage .reveal:not([data-story-scene]),
-  html.story-active.motion-ready .editorial-stage .reveal.is-visible:not([data-story-scene]),
-  html.story-active.motion-ready .editorial-stage .project-card .card-meta,
-  html.story-active.motion-ready .editorial-stage .project-card .card-body h3,
-  html.story-active.motion-ready .editorial-stage .project-card .card-body p,
-  html.story-active.motion-ready .editorial-stage .project-card .card-body::after {
-    opacity: 1 !important;
-    transform: none !important;
-    translate: none !important;
-    transition: none !important;
-    clip-path: none !important;
-  }
-
-  html.story-active.motion-ready .editorial-stage .hero-stage {
-    opacity: var(--scene-opacity, 1) !important;
-    transform: translate3d(0, var(--scene-y, 0px), 0)
-               scale(var(--scene-scale, 1)) !important;
-  }
-  html.story-active.motion-ready .editorial-stage .services-band,
-  html.story-active.motion-ready .editorial-stage .project-card,
-  html.story-active.motion-ready .editorial-stage .lab-preview {
-    opacity: var(--scene-opacity, 0) !important;
-    transform: translate3d(0, var(--scene-y, 42px), 0)
-               scale(var(--scene-scale, 1.035)) !important;
-  }
-  html.story-active .editorial-stage .hero-word,
-  html.story-active .editorial-stage .hero-portrait {
-    translate: none !important;
-  }
-  html.story-active .editorial-stage .project-card .card-body h3,
-  html.story-active .editorial-stage .project-card .card-body p,
-  html.story-active .editorial-stage .project-card .card-meta {
-    visibility: visible !important;
+  /* Reveal motion belongs to the document; the stage controls these elements. */
+  html.story-active.motion-ready .editorial-stage .reveal:not([data-story-scene]) {
+    opacity: 1;
+    translate: none;
+    transition: none;
   }
 
   /* The chapter rail never captures pointer or keyboard input. */
@@ -286,36 +261,29 @@
     transform: scale(1.65);
   }
 
-  /* No independent sticky projects from V3 should survive in this mode. */
-  html.story-active #proyectos .project-card,
-  html.story-active #proyectos .project-card:nth-child(1),
-  html.story-active #proyectos .project-card:nth-child(2),
-  html.story-active #proyectos .project-card:nth-child(3) {
-    position: absolute !important;
-  }
 }
 .story-rail { display: none; }
 
 
-/* JMael V4.1 audit corrections: visible project context and seamless exit.
+/* Project context and seamless exit.
    This layer is activated only after JS's layout-fit checks succeed. */
 @media (min-width: 1100px) and (min-height: 640px) and (prefers-reduced-motion: no-preference) {
   /* Keep the semantic projects heading available to assistive technologies,
      but don't let it consume a second row in the single-stage composition. */
   html.story-active #proyectos .section-heading {
-    display: block !important;
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    border: 0 !important;
-    overflow: hidden !important;
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    border: 0;
+    overflow: hidden;
     clip-path: inset(50%);
     white-space: nowrap;
   }
   html.story-active #proyectos .section-heading > button {
-    display: none !important;
+    display: none;
   }
 
   /* A chapter label stays visible throughout each project scene. */
@@ -326,17 +294,6 @@
     font: 600 clamp(10px, .85vw, 13px)/1.5 Arial, sans-serif;
     letter-spacing: 2px;
     margin-bottom: clamp(17px, 3vh, 36px);
-  }
-
-  /* One lightweight controller drives the stage. Turn off the old
-     independent intro animations inside it to avoid conflicting motion. */
-  html.story-active.motion-ready .editorial-stage .hero-copy,
-  html.story-active.motion-ready .editorial-stage .hero-word,
-  html.story-active.motion-ready .editorial-stage .hero-portrait,
-  html.story-active.motion-ready .editorial-stage .hero-role,
-  html.story-active.motion-ready .editorial-stage .hero-description,
-  html.story-active.motion-ready .editorial-stage .hero-actions {
-    animation: none !important;
   }
 
   /* Promote only nearby panels, not all six full-screen layers. */
@@ -387,3 +344,34 @@
   .hero-description { max-width: 32ch; font-size: 16px; line-height: 1.65; }
   .hero-cta { max-width: 280px; font-size: 15px; min-height: 48px; }
 }
+
+/* Responsive portrait and name composition; no new animation overrides. */
+@media (max-width: 600px) {
+  .hero-stage { padding: 38px 7% 0; }
+  .hero-copy { max-width: none; }
+  .hero-word { top: auto; bottom: 35px; left: 0; font-size: 35vw; opacity: .22; }
+  .hero h1 { font-size: clamp(46px, 13.6vw, 72px); white-space: normal; }
+  .hero-role { font-size: clamp(18px, 5vw, 24px); margin-top: 14px; }
+  .hero-description { max-width: 34ch; font-size: 16px; margin-top: 16px; }
+  .hero-actions { margin-top: 20px; }
+  .hero-cta { width: 100%; max-width: 310px; }
+  .location { margin-top: 16px; }
+  .hero-portrait { height: clamp(250px, 70vw, 340px); margin-top: -12px; justify-self: end; }
+  .portrait-glow { inset: 45% 0 0; }
+  .portrait-note { bottom: 12px; left: 7%; right: auto; }
+  .header nav { max-height: calc(100dvh - 70px); overflow-y: auto; }
+  .menu-toggle { min-width: 64px; justify-content: flex-end; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover .project-art { filter: saturate(1); }
+}
+.project-dialog-visual { margin: 22px 0; }
+.project-dialog-visual .project-art { height: 220px; width: 100%; }
+.project-dialog-visual figcaption { color: #c3b2bb; font-size: 12px; margin-top: 10px; line-height: 1.6; }
+.project-dialog-visual img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
+.project-evidence { margin: 20px 0 26px; }
+.project-evidence h3 { font-size: 12px; font-weight: 400; letter-spacing: 1px; color: #d4a6b6; margin: 18px 0 8px; }
+.project-evidence p, .project-evidence li { font-size: 14px; color: #c6b4bf; line-height: 1.7; }
+.project-evidence ul { padding-left: 20px; margin: 8px 0; }
+.project-evidence a { display: inline-block; padding: 10px 0; border-bottom: 1px solid #876070; color: #f0dce5; }
+body:has(dialog[open]) { overflow: hidden; }
