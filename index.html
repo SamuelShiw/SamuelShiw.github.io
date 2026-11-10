@@ -1,110 +1,186 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#02070d">
-<meta name="description" content="JMael, portafolio creativo de J. Samuel, desarrollador full-stack de Puno, Perú. Software, diseño digital y exploraciones.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JMael | Portfolio 2026">
-<meta property="og:description" content="Diseño soluciones. Construyo productos. Comparto el proceso.">
-<meta property="og:url" content="https://jmael.me/">
-<title>JMael | Portfolio 2026 · Creative Developer</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' fill='%23020b14'/%3E%3Ctext x='8' y='58' font-family='Arial' font-size='47' font-weight='bold' fill='%23f1f5f8'%3EJM%3C/text%3E%3C/svg%3E">
-<link rel="preload" href="assets/display-bold.otf" as="font" type="font/otf" crossorigin>
-<link rel="preload" href="assets/j-samuel-portrait-lossless.webp" as="image">
-<link rel="stylesheet" href="creative-portfolio.css?v=20261110b">
-<script src="creative-portfolio.js?v=20261110b" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071018">
+  <meta name="description" content="J. Samuel, desarrollador full-stack de Puno, Perú. Desarrollo productos y soluciones de software con foco en procesos reales, arquitectura y experiencia de usuario.">
+  <meta name="author" content="Jose Samuel Quispe Mamani">
+  <link rel="canonical" href="https://jmael.me/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:title" content="JMael | J. Samuel, desarrollo de software y productos">
+  <meta property="og:description" content="Diseño soluciones. Construyo productos. Comparto el proceso. Conoce mis proyectos y mi forma de trabajar.">
+  <meta property="og:url" content="https://jmael.me/">
+  <meta name="twitter:card" content="summary">
+  <title>JMael | J. Samuel · Desarrollador full-stack</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='12' fill='%23071018'/%3E%3Ctext x='13' y='56' font-family='Arial' font-size='41' font-weight='bold' fill='%23f2f4f5'%3EJM%3C/text%3E%3Ccircle cx='67' cy='56' r='4' fill='%23c22248'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/display-bold.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="assets/j-samuel-portrait-lossless.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="creative-portfolio.css?v=20261110c">
+  <script src="creative-portfolio.js?v=20261110c" defer></script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Jose Samuel Quispe Mamani",
+    "alternateName":"J. Samuel",
+    "url":"https://jmael.me/",
+    "jobTitle":"Desarrollador full-stack",
+    "description":"Estudiante de Ingeniería de Software con IA y desarrollador de productos de software.",
+    "homeLocation":{"@type":"Place","name":"Puno, Perú"},
+    "sameAs":["https://github.com/SamuelShiw","https://www.linkedin.com/in/j-samuell/"]
+  }
+  </script>
 </head>
 <body>
-<a class="skip" href="#contenido">Saltar al contenido</a>
-<main id="contenido" class="portfolio-shell">
-  <section class="panel intro" id="inicio" aria-labelledby="intro-title">
-    <a class="mono" href="#inicio" aria-label="JMael inicio">J<i>M</i></a>
-    <div class="intro-composition">
-      <div class="hero-photo"><img src="assets/j-samuel-portrait-lossless.webp" alt="J. Samuel en retrato editorial" width="1024" height="1536" fetchpriority="high"></div>
-      <div class="intro-title"><h1 id="intro-title">PORTFOLIO</h1><span class="intro-year">2026</span><p class="intro-role"><i aria-hidden="true"></i> CREATIVE DEVELOPER</p></div>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header" id="arriba">
+    <div class="header-inner">
+      <a href="#inicio" class="brand" aria-label="JMael, volver al inicio">JM<span>.</span><small>JMAEL / 2026</small></a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-primary">
+        <span class="menu-lines" aria-hidden="true"><i></i><i></i></span><span class="menu-text">MENÚ</span>
+      </button>
+      <nav class="site-nav" id="nav-primary" aria-label="Navegación principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#enfoque">Enfoque</a>
+        <a href="#perfil">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <a class="header-cta" href="mailto:sumailqm10@gmail.com?subject=Conversemos%20sobre%20software">HABLEMOS <span aria-hidden="true">↗</span></a>
     </div>
-    <nav class="start-menu" aria-label="Entrar al portafolio">
-      <a href="#perfil">START</a>
-      <button type="button" data-options>OPTIONS</button>
-      <a href="#contacto" aria-label="Exit, ir al contacto">EXIT</a>
-    </nav>
-    <span class="screen-edge">JMAEL / PERSONAL ARCHIVE</span>
-  </section>
+  </header>
 
-  <section class="panel profile" id="perfil" aria-labelledby="profile-title">
-    <header class="screen-header">
-      <a class="mono mono-small" href="#inicio" aria-label="Volver al inicio">J<i>M</i></a>
-      <nav class="screen-nav" aria-label="Navegación del portafolio"><a href="#perfil" class="active">PROFILE</a><a href="#proyectos">PROJECTS</a><a href="#contacto">CONTACT</a></nav>
-    </header>
-    <div class="panel-body profile-content">
-      <div class="profile-left">
-        <span class="profile-greeting">HELLO, I AM</span>
-        <h2 class="profile-name">J. SAMUEL</h2>
-        <div class="profile-portrait"><img src="assets/j-samuel-portrait-lossless.webp" alt="Fotografía editorial de J. Samuel" loading="lazy" width="1024" height="1536"></div>
-      </div>
-      <div class="profile-right">
-        <h2 class="section-heading" id="profile-title">ABOUT ME</h2>
-        <p class="profile-copy">Soy J. Samuel, desarrollador full-stack y creador digital de Puno, Perú. Me gusta transformar problemas reales en productos útiles, combinando ingeniería, diseño y creatividad.</p>
-        <h3 class="detail-heading">SOFTWARE SKILLS</h3>
-        <div class="skill-row" aria-label="Tecnologías"><span class="skill-icon ts" title="TypeScript">TS</span><span class="skill-icon react" title="React">⚛</span><span class="skill-icon js" title="JavaScript">JS</span><span class="skill-icon db" title="PostgreSQL">SQL</span><span class="skill-icon ui" title="Diseño de interfaces">UI</span></div>
-        <div class="profile-columns">
-          <div><h3 class="detail-heading">EDUCATION</h3><p>SENATI<br>Ingeniería de Software con IA<br>En formación</p></div>
-          <div><h3 class="detail-heading">EXPERIENCE</h3><p>Software para negocios<br>Desarrollo de productos<br>Datos y operaciones</p></div>
+  <main id="contenido">
+    <section class="hero section-wrap" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-grain" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow hero-eyebrow"><span class="tiny-square" aria-hidden="true"></span> PORTAFOLIO PERSONAL <span class="eyebrow-divider">/</span> 2026</p>
+        <p class="hero-overline">J. SAMUEL <span aria-hidden="true">✳</span> CREATIVE DEVELOPER</p>
+        <h1 id="hero-title">IDEAS QUE<br>SE VUELVEN<br><span>SOFTWARE.</span></h1>
+        <p class="hero-description">Hola, soy <strong>J. Samuel</strong>. Desarrollo productos y sistemas digitales para resolver problemas reales. Me interesa tanto cómo funciona el software como la experiencia de quienes lo utilizan.</p>
+        <p class="hero-role">DESARROLLADOR FULL-STACK <span aria-hidden="true">/</span> INGENIERÍA DE SOFTWARE CON IA (EN FORMACIÓN)</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#proyectos">EXPLORAR MI TRABAJO <span aria-hidden="true">↗</span></a>
+          <a class="button button-text" href="#contacto">CONTACTARME <span aria-hidden="true">↗</span></a>
         </div>
-        <h3 class="detail-heading">LANGUAGE</h3>
-        <p class="language-list"><span>Español</span><span>Nativo</span><span>Inglés</span><span>En aprendizaje</span></p>
       </div>
-    </div>
-  </section>
+      <div class="hero-art" aria-label="Retrato editorial de J. Samuel">
+        <div class="hero-red-shape" aria-hidden="true"></div>
+        <div class="hero-photo-wrap">
+          <img src="assets/j-samuel-portrait-lossless.webp" alt="Retrato de J. Samuel con traje oscuro y gafas" width="1024" height="1536" fetchpriority="high">
+        </div>
+        <span class="hero-photo-caption">J. SAMUEL <span aria-hidden="true">✳</span> PUNO, PERÚ</span>
+        <span class="hero-art-index" aria-hidden="true">001<br>ARCHIVE</span>
+      </div>
+      <div class="hero-bottom"><span>01 / IDENTIDAD</span><a href="#proyectos">DESLIZA PARA EXPLORAR <span aria-hidden="true">↓</span></a><span>PUNO · PERÚ</span></div>
+    </section>
 
-  <section class="panel projects" id="proyectos" aria-labelledby="projects-title">
-    <header class="screen-header">
-      <a class="mono mono-small" href="#inicio" aria-label="Volver al inicio">J<i>M</i></a>
-      <nav class="screen-nav" aria-label="Navegación del portafolio"><a href="#perfil">PROFILE</a><a href="#proyectos" class="active">PROJECTS</a><a href="#contacto">CONTACT</a></nav>
-    </header>
-    <h2 id="projects-title">RECAP PROJECT 2026 <small>NO. 01</small></h2>
-    <div class="project-grid" aria-label="Galería reservada para próximos proyectos">
-      <div class="empty-project" aria-label="Espacio reservado 1"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 2"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 3"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 4"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 5"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 6"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 7"><span aria-hidden="true">+</span></div>
-      <div class="empty-project" aria-label="Espacio reservado 8"><span aria-hidden="true">+</span></div>
-    </div>
-    <p class="project-note">SELECTED WORK / COMING SOON</p>
-  </section>
+    <section class="value-section section-wrap" id="enfoque" aria-labelledby="value-title">
+      <div class="section-intro reveal">
+        <p class="eyebrow">02 / QUÉ APORTO</p>
+        <h2 class="section-title" id="value-title">NO SOLO CÓDIGO.<br><span>SOLUCIONES PENSADAS.</span></h2>
+        <p>Busco entender el flujo de trabajo antes de elegir herramientas. Así puedo diseñar sistemas que respondan a un objetivo concreto y puedan evolucionar sin convertirse en una carga.</p>
+      </div>
+      <div class="capabilities">
+        <article class="capability reveal"><span class="cap-number">01</span><div><h3>DESARROLLO FULL-STACK</h3><p>Interfaces, APIs, lógica de negocio y datos. Una visión integral para conectar las piezas del producto.</p></div><span class="cap-arrow" aria-hidden="true">↗</span></article>
+        <article class="capability reveal"><span class="cap-number">02</span><div><h3>ARQUITECTURA Y PRODUCTO</h3><p>Flujos, reglas, permisos y decisiones técnicas proporcionales al problema. Claridad antes que complejidad.</p></div><span class="cap-arrow" aria-hidden="true">↗</span></article>
+        <article class="capability reveal"><span class="cap-number">03</span><div><h3>DATOS Y AUTOMATIZACIÓN</h3><p>Organizar información para facilitar operaciones, análisis y decisiones. IA cuando aporta valor real.</p></div><span class="cap-arrow" aria-hidden="true">↗</span></article>
+      </div>
+    </section>
 
-  <section class="panel contact" id="contacto" aria-labelledby="contact-title">
-    <header class="screen-header">
-      <a class="mono mono-small" href="#inicio" aria-label="Volver al inicio">J<i>M</i></a>
-      <nav class="screen-nav" aria-label="Navegación del portafolio"><a href="#perfil">PROFILE</a><a href="#proyectos">PROJECTS</a><a href="#contacto" class="active">CONTACT</a></nav>
-    </header>
-    <div class="contact-content">
-      <div class="contact-person">
-        <div class="contact-avatar"><img src="assets/j-samuel-portrait-lossless.webp" loading="lazy" width="1024" height="1536" alt="J. Samuel"></div>
-        <strong>J. SAMUEL</strong><span>PUNO, PERÚ</span>
+    <section class="work-section section-wrap" id="proyectos" aria-labelledby="work-title">
+      <div class="section-intro work-intro reveal">
+        <p class="eyebrow">03 / SELECTED WORK</p>
+        <h2 class="section-title" id="work-title">TRABAJO QUE<br><span>CUENTA ALGO.</span></h2>
+        <p>Proyectos con diferentes contextos: operación real, formación técnica y exploración personal. Cada uno tiene un objetivo y un alcance propio.</p>
       </div>
-      <div class="contact-social"><h2>CONTACT ME</h2>
-        <a href="https://github.com/SamuelShiw" target="_blank" rel="noopener noreferrer"><span class="symbol" aria-hidden="true">G</span><span>GITHUB ↗</span></a>
-        <a href="https://www.linkedin.com/in/j-samuell/" target="_blank" rel="noopener noreferrer"><span class="symbol" aria-hidden="true">in</span><span>LINKEDIN ↗</span></a>
-        <a href="mailto:sumailqm10@gmail.com"><span class="symbol" aria-hidden="true">@</span><span>EMAIL ↗</span></a>
-        <a href="https://wa.me/51901036216" target="_blank" rel="noopener noreferrer"><span class="symbol" aria-hidden="true">↗</span><span>WHATSAPP ↗</span></a>
+
+      <article class="project-feature reveal" id="caso-bracket" aria-labelledby="bracket-title">
+        <div class="project-visual visual-bracket">
+          <div class="ui-glow" aria-hidden="true"></div>
+          <div class="mock-dashboard" aria-hidden="true">
+            <div class="mock-sidebar"><b>B.</b><span></span><span></span><span></span><span></span></div>
+            <div class="mock-main">
+              <div class="mock-top"><span>BRACKET / WORKSPACE</span><span>CLINIC</span></div>
+              <div class="mock-tabs"><i>AGENDA</i><i>PACIENTES</i><i>CAJA</i></div>
+              <div class="mock-heading"><b>Agenda</b><small>Vista de trabajo</small></div>
+              <div class="mock-line wide"></div><div class="mock-line"></div><div class="mock-line medium"></div>
+              <div class="mock-calendar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <span class="visual-disclaimer">REPRESENTACIÓN CONCEPTUAL · SIN DATOS REALES</span>
+          <span class="visual-stamp" aria-hidden="true">01 / WEB APP</span>
+        </div>
+        <div class="project-content">
+          <p class="project-meta"><span>01 / CASO REAL</span><span>SOFTWARE CLÍNICO</span></p>
+          <h3 id="bracket-title">BRACKET<span class="dot">.</span></h3>
+          <p class="project-lead">Organizar la operación de una clínica odontológica desde un solo sistema.</p>
+          <p class="project-copy">Proyecto desarrollado en el contexto de mis prácticas preprofesionales. Trabajo con procesos de agenda, pacientes, atención clínica, finanzas e inventario, cuidando las reglas de negocio y los permisos de cada rol.</p>
+          <div class="project-facts"><span>REACT</span><span>TYPESCRIPT</span><span>NODE.JS</span><span>POSTGRESQL</span></div>
+          <p class="project-state"><span class="state-dot"></span> PROYECTO EN EVOLUCIÓN · CÓDIGO PRIVADO</p>
+          <a class="text-arrow" href="#contacto">CONVERSAR SOBRE ESTE CASO <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>
+
+      <div class="other-projects">
+        <article class="project-small reveal" aria-labelledby="eco-title">
+          <div class="small-visual visual-eco">
+            <div class="eco-phone" aria-hidden="true"><div class="eco-notch"></div><small>ECO / REGISTRO</small><b>RESIDUOS</b><div class="eco-card"><i></i><span>Registro en campo</span></div><div class="eco-card"><i></i><span>Sin conexión</span></div><div class="eco-card"><i></i><span>Reportes</span></div></div>
+            <span class="visual-disclaimer">VISUALIZACIÓN ILUSTRATIVA</span>
+          </div>
+          <div class="small-project-copy"><p class="project-meta"><span>02 / PROYECTO ACADÉMICO</span><span>ANDROID</span></p><h3 id="eco-title">ECOREGISTRO<span class="dot">.</span></h3><p>Registro de residuos en campo con almacenamiento local y sincronización. Un ejercicio de diseño de flujos offline-first, datos y reportes.</p><div class="project-facts"><span>JAVA</span><span>SQLITE</span><span>FIREBASE</span></div><a class="text-arrow" href="https://github.com/SamuelShiw/EcoRegistroSenati" target="_blank" rel="noopener noreferrer">VER REPOSITORIO PÚBLICO <span aria-hidden="true">↗</span></a></div>
+        </article>
+        <article class="project-small reveal" aria-labelledby="jmael-title">
+          <div class="small-visual visual-jmael">
+            <div class="jmael-poster" aria-hidden="true"><small>AN EXPERIMENT IN DIGITAL IDENTITY</small><strong>JMAEL<span>.</span></strong><em>CREATIVE / ENGINEERING</em></div>
+            <span class="visual-disclaimer">IDENTIDAD VISUAL / WEB PERSONAL</span>
+          </div>
+          <div class="small-project-copy"><p class="project-meta"><span>03 / PROYECTO PERSONAL</span><span>WEB</span></p><h3 id="jmael-title">JMAEL.ME<span class="dot">.</span></h3><p>Mi propio espacio para experimentar con composición editorial, interfaces web y una forma clara de presentar el trabajo técnico.</p><div class="project-facts"><span>HTML</span><span>CSS</span><span>JAVASCRIPT</span><span>GITHUB PAGES</span></div><a class="text-arrow" href="https://github.com/SamuelShiw/SamuelShiw.github.io" target="_blank" rel="noopener noreferrer">EXPLORAR EL CÓDIGO <span aria-hidden="true">↗</span></a></div>
+        </article>
       </div>
-      <div class="thank-you"><h2 id="contact-title">THANK YOU<br><span>2026</span></h2></div>
-    </div>
-    <div class="contact-bottom" aria-label="Espacios reservados del archivo personal"><div class="archive-tile">ARCHIVE / 01</div><div class="archive-tile">ARCHIVE / 02</div><div class="archive-tile">ARCHIVE / 03</div></div>
-    <div class="analog-art" aria-hidden="true"><div class="film"></div><div class="cassette"></div></div>
-    <span class="footer-caption">JMAEL © 2026 / MADE IN PERÚ</span>
-  </section>
-</main>
-<dialog class="options-dialog" id="options-dialog" aria-labelledby="options-title">
-  <h2 id="options-title">OPTIONS</h2><p>Configura cómo quieres explorar mi portafolio.</p>
-  <label><input type="checkbox" id="reduce-motion"> Reducir movimiento</label>
-  <button type="button" data-close-options>CLOSE</button>
-</dialog>
+    </section>
+
+    <section class="process-section section-wrap" id="proceso" aria-labelledby="process-title">
+      <div class="section-intro reveal">
+        <p class="eyebrow">04 / MÉTODO</p>
+        <h2 class="section-title" id="process-title">PRIMERO ENTENDER.<br><span>DESPUÉS CONSTRUIR.</span></h2>
+        <p>Mi forma de abordar un problema combina criterio de producto e ingeniería. No todo necesita una arquitectura gigantesca; todo necesita una razón para existir.</p>
+      </div>
+      <div class="process-grid">
+        <article class="process-step reveal"><span>01 / DISCOVER</span><h3>ENTENDER</h3><p>Objetivo, usuarios, flujos, restricciones y criterios de éxito.</p></article>
+        <article class="process-step reveal"><span>02 / DESIGN</span><h3>DISEÑAR</h3><p>Módulos, datos, interfaces y responsabilidades claras.</p></article>
+        <article class="process-step reveal"><span>03 / BUILD</span><h3>CONSTRUIR</h3><p>Iteraciones pequeñas, cambios verificables y mantenimiento realista.</p></article>
+        <article class="process-step reveal"><span>04 / VERIFY</span><h3>VERIFICAR</h3><p>Casos límite, pruebas, validaciones y revisión antes de entregar.</p></article>
+      </div>
+      <div class="toolkit reveal"><p>TECNOLOGÍAS CON LAS QUE TRABAJO</p><div><span>TypeScript</span><span>React</span><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Prisma</span><span>Python</span><span>Git</span><span>Power BI</span></div></div>
+    </section>
+
+    <section class="about-section section-wrap" id="perfil" aria-labelledby="about-title">
+      <div class="about-photo reveal"><div class="about-photo-frame"><img src="assets/j-samuel-portrait-lossless.webp" alt="J. Samuel, desarrollador de software" width="1024" height="1536" loading="lazy"></div><span>J. SAMUEL / PUNO, PERÚ</span></div>
+      <div class="about-copy reveal">
+        <p class="eyebrow">05 / SOBRE MÍ</p>
+        <h2 class="section-title" id="about-title">DEL CAMPO<br><span>AL SOFTWARE.</span></h2>
+        <p>Antes de concentrarme en el desarrollo trabajé en operaciones mineras como ayudante de perforista. Esa experiencia me acercó a procesos reales, decisiones en campo y problemas que no aparecen en un tutorial.</p>
+        <p>Hoy estudio <strong>Ingeniería de Software con Inteligencia Artificial en SENATI</strong> y desarrollo proyectos donde puedo aplicar ese aprendizaje a situaciones concretas.</p>
+        <p>Quiero seguir creciendo como ingeniero de software, especialmente en arquitectura, desarrollo de productos y soluciones para negocios.</p>
+        <div class="about-points"><div><span>FORMACIÓN</span><strong>Ingeniería de Software con IA · SENATI</strong></div><div><span>EXPERIENCIA</span><strong>Software aplicado a procesos de negocio y operaciones</strong></div><div><span>UBICACIÓN</span><strong>Puno, Perú · Trabajo y colaboración remota</strong></div></div>
+        <a class="text-arrow" href="https://github.com/SamuelShiw" target="_blank" rel="noopener noreferrer">CONOCER MI GITHUB <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="contact-section section-wrap" id="contacto" aria-labelledby="contact-title">
+      <div class="contact-top reveal"><p class="eyebrow">06 / CONNECT</p><span>LET'S BUILD SOMETHING USEFUL.</span></div>
+      <h2 class="contact-title reveal" id="contact-title">¿TIENES UN<br><span>PROBLEMA</span><br>POR RESOLVER?</h2>
+      <p class="contact-intro reveal">Si estás evaluando mi perfil para un equipo, o quieres conversar sobre un sistema, una web o una idea de producto, aquí podemos empezar.</p>
+      <div class="contact-actions reveal">
+        <a class="button button-primary" href="mailto:sumailqm10@gmail.com?subject=Oportunidad%20profesional%20-%20J.%20Samuel">OPORTUNIDAD PROFESIONAL <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href="https://wa.me/51901036216?text=Hola%20Samuel%2C%20quisiera%20conversar%20sobre%20un%20proyecto%20de%20software." target="_blank" rel="noopener noreferrer">TENGO UN PROYECTO <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="contact-footer"><div class="contact-links"><a href="mailto:sumailqm10@gmail.com">EMAIL <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/j-samuell/" target="_blank" rel="noopener noreferrer">LINKEDIN <span aria-hidden="true">↗</span></a><a href="https://github.com/SamuelShiw" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a></div><span>JMAEL © 2026 / PUNO, PERÚ</span><a href="#inicio" class="back-top">VOLVER ARRIBA ↑</a></div>
+    </section>
+  </main>
+  <button type="button" class="motion-switch" data-motion-toggle aria-pressed="false" aria-label="Reducir movimiento">MOVIMIENTO: ON</button>
 </body>
 </html>
