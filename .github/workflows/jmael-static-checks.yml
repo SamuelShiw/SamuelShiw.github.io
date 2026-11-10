@@ -30,14 +30,14 @@ jobs:
                   if attrs.get('id'): self.ids.add(attrs['id'])
                   if tag=='a' and attrs.get('href','').startswith('#'):
                       self.links.append(attrs['href'][1:])
-                  if tag=='link' and attrs.get('href') and not attrs['href'].startswith('data:'):
+                  if tag=='link' and attrs.get('href') and not attrs['href'].startswith(('data:', 'http:', 'https:', '#')):
                       self.assets.append(attrs['href'].split('?')[0])
                   if tag in ('img','script') and attrs.get('src'):
                       self.assets.append(attrs['src'].split('?')[0])
 
           page=Page()
           page.feed(Path('index.html').read_text(encoding='utf-8'))
-          needed={'contenido','inicio','perfil','proyectos','contacto','options-dialog'}
+          needed={'contenido','inicio','enfoque','proyectos','proceso','perfil','contacto'}
           assert needed <= page.ids, f'Missing IDs: {needed-page.ids}'
           assert not (set(page.links)-page.ids), f'Broken anchor links: {set(page.links)-page.ids}'
           for p in page.assets:
