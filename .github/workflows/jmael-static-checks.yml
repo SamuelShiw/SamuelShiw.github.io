@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, feat/jmael-creative-portfolio-2026]
+    branches: [main, feat/jmael-professional-portfolio-v2]
 jobs:
   static-check:
     runs-on: ubuntu-latest
@@ -30,18 +30,72 @@ jobs:
                   if attrs.get('id'): self.ids.add(attrs['id'])
                   if tag=='a' and attrs.get('href','').startswith('#'):
                       self.links.append(attrs['href'][1:])
-                  if tag=='link' and attrs.get('href') and not attrs['href'].startswith('data:'):
+                  if tag=='link' and attrs.get('href') and not attrs['href'].startswith(('data:', 'http:', 'https:', '#')):
                       self.assets.append(attrs['href'].split('?')[0])
                   if tag in ('img','script') and attrs.get('src'):
                       self.assets.append(attrs['src'].split('?')[0])
 
           page=Page()
           page.feed(Path('index.html').read_text(encoding='utf-8'))
-          needed={'contenido','inicio','perfil','proyectos','contacto','options-dialog'}
+          needed={'contenido','inicio','enfoque','proyectos','proceso','perfil','contacto'}
           assert needed <= page.ids, f'Missing IDs: {needed-page.ids}'
           assert not (set(page.links)-page.ids), f'Broken anchor links: {set(page.links)-page.ids}'
           for p in page.assets:
               assert Path(p).is_file(), f'Missing asset: {p}'
           assert Path('CNAME').read_text().strip()=='jmael.me'
           print('HTML references, section IDs and domain verified.')
+          PY
+      - name: Check portfolio content, privacy, semantics and SEO
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from xml.etree import ElementTree
+
+          class Audit(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.h1 = 0
+                  self.imgs = []
+                  self.external = []
+                  self.titles = []
+                  self.descriptions = 0
+                  self.canonicals = 0
+                  self.details = 0
+                  self.summaries = 0
+              def handle_starttag(self, tag, attrs):
+                  a = dict(attrs)
+                  if tag == 'h1': self.h1 += 1
+                  if tag == 'img': self.imgs.append(a)
+                  if tag == 'a' and a.get('target') == '_blank': self.external.append(a)
+                  if tag == 'title': self.titles.append(tag)
+                  if tag == 'meta' and a.get('name') == 'description': self.descriptions += 1
+                  if tag == 'link' and a.get('rel') == 'canonical': self.canonicals += 1
+                  if tag == 'details': self.details += 1
+                  if tag == 'summary': self.summaries += 1
+
+          html = Path('index.html').read_text(encoding='utf-8')
+          audit = Audit()
+          audit.feed(html)
+          assert audit.h1 == 1, f'Expected exactly one H1, got {audit.h1}'
+          assert audit.descriptions == 1 and audit.canonicals == 1
+          assert len(audit.imgs) >= 2
+          assert all('alt' in item and item['alt'].strip() for item in audit.imgs)
+          assert all({'noopener','noreferrer'} <= set(item.get('rel','').split())
+                     for item in audit.external)
+          assert audit.details >= 1 and audit.summaries >= 1
+          for text in ['BRACKET', 'ECOREGISTRO', 'INGENIERÍA', 'CONTACTARME',
+                       'PROYECTO ACADÉMICO', 'REPRESENTACIÓN CONCEPTUAL']:
+              assert text in html, f'Missing honest portfolio content: {text}'
+          assert 'https://github.com/SamuelShiw/Software-Dental' not in html, \
+                 'Do not expose private project source'
+          assert 'class="empty-project"' not in html, 'Do not show empty projects'
+          assert Path('robots.txt').is_file()
+          assert 'https://jmael.me/sitemap.xml' in Path('robots.txt').read_text()
+          root = ElementTree.parse('sitemap.xml').getroot()
+          ns = '{http://www.sitemaps.org/schemas/sitemap/0.9}'
+          assert any(url.findtext(ns+'loc') == 'https://jmael.me/'
+                     for url in root.findall(ns+'url'))
+          print('Professional content, privacy, semantics and SEO validated.')
           PY

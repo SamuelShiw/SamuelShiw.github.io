@@ -1,33 +1,63 @@
-# JMael — J. Samuel
+# JMael · Portafolio profesional
 
-Sitio personal de J. Samuel, desarrollador full stack y consultor de software.
+Sitio personal de **J. Samuel (Jose Samuel Quispe Mamani)**, desarrollador full-stack y estudiante de Ingeniería de Software con IA en SENATI.
 
-- Sitio: https://jmael.me/
-- Publicación: GitHub Pages desde `main`, directorio raíz.
-- Tecnología: HTML, CSS y JavaScript sin dependencias ni compilación.
+**Sitio público:** https://jmael.me/
+
+## Propósito
+
+Ofrecer una presentación clara a dos audiencias:
+- **Empresas / reclutadores** que quieren conocer experiencia, proyectos, tecnologías y criterio de ingeniería.
+- **Clientes / colaboradores** que necesitan evaluar un desarrollo de software.
+
+El sitio conserva una identidad editorial de fondo oscuro, tipografía condensada y retrato personal, pero prioriza casos reales, contenido verificable y caminos claros para contactar.
+
+## Tecnología
+
+GitHub Pages desde `main` y raíz del repositorio; HTML, CSS y JavaScript estáticos, sin backend ni proceso de compilación.
+
+Archivos activos:
+- `index.html`: estructura, SEO y contenido.
+- `creative-portfolio.css`: diseño adaptable y estilo editorial.
+- `creative-portfolio.js`: menú móvil, progreso de lectura y mejoras opcionales de movimiento.
+- `assets/j-samuel-portrait-lossless.webp` y `assets/j-samuel-alpha.webp`: fotografía y su máscara alineadas en proporción 2:3.
+- `assets/display-bold.otf`: tipografía local (ver `assets/font-license.txt`).
+- `CNAME`: dominio personalizado. **No eliminarlo ni cambiarlo**.
+- `robots.txt` / `sitemap.xml`: descubrimiento básico.
+
+Los archivos `style.css`, `app.js`, `editorial-v2.css` y `story-engine.*` corresponden a versiones anteriores y ya no se cargan en el documento principal. Se conservan para facilitar referencia histórica y rollback.
+
+## Casos y privacidad
+
+- **BRACKET**: trabajo en contexto de prácticas preprofesionales para una clínica real. El código funcional y los datos privados no se publican ni se enlazan. La representación gráfica en la web es *conceptual*, no una captura real.
+- **EcoRegistro**: aplicación Android académica, enlazada a su repositorio público, con descripción acorde con su README.
+- **JMael**: este sitio, con repositorio público enlazado.
+
+No se publican testimonios, métricas, cifras de impacto o estados de producción sin evidencia.
+
+## Comprobaciones
+
+La acción `JMael Creative Portfolio Checks` valida:
+1. Sintaxis de `creative-portfolio.js` con `node --check`.
+2. Existencia de archivos y referencias enlazadas.
+3. IDs/anchors, recursos, el archivo CNAME y reglas básicas de accesibilidad/semántica.
+
+También se debe comprobar visualmente en pantallas de escritorio y móvil. Una acción correcta no sustituye esa revisión.
 
 ## Desarrollo local
 
-Ejecuta `python -m http.server 8080` desde la raíz y abre http://localhost:8080/.
+```bash
+python -m http.server 8080
+```
 
-## Archivos principales
+Abrir http://localhost:8080 y verificar navegación, contacto, proyectos, ajustes de movimiento y diseños responsive.
 
-- `index.html`: contenido y diálogos.
-- `style.css`: diseño adaptable.
-- `app.js`: navegación, proyectos y preparación de consultas.
-- `assets/`: retrato, máscara y tipografía local con su licencia.
-- `CNAME`: dominio personalizado; conservar `jmael.me`.
+## Publicación y rollback
 
-El retrato conserva los píxeles de la fotografía original mediante WebP sin pérdida y una máscara alfa independiente. Los proyectos en desarrollo se identifican como tales. Las consultas se preparan en WhatsApp o correo y el visitante decide enviarlas; no hay backend ni almacenamiento de formularios.
+GitHub Pages publica automáticamente los cambios fusionados a `main`. Para revertir una entrega, restaurar el commit anterior o revertir el merge desde GitHub. Conservar `CNAME` y `.nojekyll`.
 
-Versión del diseño migrada desde el commit `77c24d03186dd1959e7241226cdd5ed3a86c9c23` del entorno de diseño. La página anterior permanece recuperable en el historial de Git.
+## Contacto
 
-
-## Movimiento y composición
-
-- `editorial-v2.css`: composición editorial y una sola animación de entrada por bloque.
-- `story-engine.css` / `story-engine.js`: escenas opcionales con scroll nativo, activas desde 1100 × 640 cuando todo el contenido cabe. Las transiciones muestran un solo panel a la vez.
-- En pantallas pequeñas, con movimiento reducido o cuando el contenido no cabe, se conserva el documento con scroll normal y todas las acciones disponibles.
-- Los detalles de proyectos distinguen referencias visuales de capturas reales. La captura de JMael corresponde a la portada publicada; BRACKET y Control de costos conservan referencias identificadas.
-
-Validación de esta actualización: revisión visual en Chromium a 1536 × 720, 1440 × 900, 1366 × 768, 1024 × 768, 390 × 844 y 320 × 740; navegación de escenas; apertura de detalles; menú móvil y Escape; servicio preseleccionado y rechazo de consultas vacías. Se comprobó la sintaxis de ambos scripts con `node --check`. No hay compilación ni suite de pruebas automatizadas en este sitio.
+- Correo: sumailqm10@gmail.com
+- GitHub: https://github.com/SamuelShiw
+- LinkedIn: https://www.linkedin.com/in/j-samuell/
